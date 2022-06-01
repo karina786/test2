@@ -1,0 +1,86 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"><%= image_tag 'https://previews.123rf.com/images/yupiramos/yupiramos1607/yupiramos160701221/59263338-blood-drop-icon-blood-donation-and-transfusion-theme-design-vector-illustration-.jpg', alt: 'icon', class:"image" %></a> 
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav mrgn">
+      <li class="nav-item active">
+        <%= link_to "Home", root_path, class:"btn btn-outline-danger float-left" %>
+      </li>
+
+      <li class="nav-item active mrgn">
+        <%= link_to "About", donations_aboutus_path, class:"btn btn-outline-danger " %>
+      </li>
+
+
+      <% if donar_signed_in? %>
+        <%# <li class="nav-item mrgn"> %>
+          <%# <%= button_to  "Sign Out", destroy_donar_session_path, method: :delete, class:"btn btn-outline-danger float-right" %> 
+        <%# </li> %>
+
+        <li class="nav-item mrgn">
+          <%= link_to "Profile", edit_donar_registration_path, class:"btn btn-outline-danger" %>
+        </li>
+
+        <li class="nav-item mrgn">
+          <%= link_to "Donate", new_donation_path, class:"btn btn-outline-danger" %>
+        </li>
+
+        <% if false %>
+          <% if Donation.find_by(email:current_donar.email)%>
+            <li class="nav-item mrgn">
+              <%= link_to 'ok',Donation.find_by(email:current_donar.email), class:"btn btn-outline-danger" %>
+            </li>
+          <% end %>
+        <% end %>
+         
+        <% if Donation.find_by(email:current_donar.email)%>
+          <li class="nav-item mrgn">
+            <%= link_to 'Show Data',Donation.find_by(email:current_donar.email), class:"btn btn-outline-danger" %>
+          </li>
+        <% end %>
+        
+      <% else %>
+        <li class="nav-item mrgn">
+            <%= link_to "Sign In", donar_session_path, class:"btn btn-outline-danger"%>
+        </li>
+
+        <li class="nav-item mrgn">
+          <%= link_to "Sign Up", new_donar_registration_path, class:"btn btn-outline-danger" %>
+        </li>
+
+       
+      <% end %>
+      
+      
+      <form class="d-flex" method="GET" action="/search">
+        <select  class="form control" type="search"  aria-label="Search" name="blood">
+          <option value="blood_group">Blood Group</option>
+          <option value="A+">A+</option>
+          <option value="B+">B+</option>
+          <option value="A-">A-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="B-">B-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </select> 
+        <input class="form control mw-2" type="search" placeholder="City" aria-label="Search" name="query"> 
+        <button class="btn  btn-outline-success" type="submit">Search</button>
+      </form>
+
+
+      <li class="nav-item dropdown">
+        <%# <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown link
+        </a> %>
+        <%# <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div> %>
+      </li>
+    </ul>
+  </div>
+</nav>

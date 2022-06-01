@@ -1,0 +1,71 @@
+<center>
+
+<%= form_for @donation, url: donations_path, method: :post do |form| %>
+  <div class="form-group">
+    <%= form.label :name, class:"text_color" %>
+    <%= form.text_field :name, class:"form-control", placeholder: "Enter your Name" %>
+    <% @donation.errors.full_messages_for(:name).each do |message| %>
+      <div><span><%= message %></span></div>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :blood_group, class:"h7 mt-4 right" %>
+    <%= form.select :blood_group, ["A+","B+","O+","AB+","A-","O-","B-","AB-"], class:"form-control mt-3"%>
+    <% @donation.errors.full_messages_for(:blood_group).each do |message| %>
+      <div><span><%= message %></span></div>
+    <% end %>
+  </div>
+
+
+  <div class="form-group">
+    <%= form.label :dob, class:"text_color" %><br>
+    <%= form.date_field :dob, class:"form-control" %>
+    <% @donation.errors.full_messages_for(:dob).each do |message| %>
+      <div><span><%= message %></span></div>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :gender, class:"text_color" %><br>
+    <%= form.text_field :gender, class:"form-control", placeholder: "Enter your Gender" %>
+    <% @donation.errors.full_messages_for(:gender).each do |message| %>
+      <div><span><%= message %></span></div>
+    <% end %>
+  </div>
+  <div class="form-group">
+    <%= form.label :email, class:"text_color" %><br>
+    <%= form.text_field :email, value: current_donar.email, class:"form-control", placeholder: "Enter your email",:readonly => true %>
+    <% @donation.errors.full_messages_for(:email).each do |message| %>
+      <div><span><%= message %></span></div>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :contact, class:"text_color" %><br>
+    <%= form.text_field :contact, class:"form-control", placeholder: "Enter your contact number" %>
+    <% @donation.errors.full_messages_for(:contact).each do |message| %>
+      <div><span><%= message %></span></div>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :city, class:"text_color" %><br>
+    <%= form.text_field :city, class:"form-control", placeholder: "Enter your city" %>
+    <% @donation.errors.full_messages_for(:city).each do |message| %>
+      <div><span><%= message %></span></div>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :last_donate, class:"text_color" %><br>
+    <%= form.text_field :last_donate, class:"form-control", placeholder: "Last donation date : EX- 01/01/2021" %>
+    <% @donation.errors.full_messages_for(:last_donate).each do |message| %>
+      <div><span><%= message %></span></div>
+    <% end %>
+  </div>
+  <br>
+
+  <%= form.submit class:"btn btn-outline-primary sbmt" %> <br><br>
+<% end %>
+</center>

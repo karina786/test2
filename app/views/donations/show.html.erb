@@ -1,0 +1,54 @@
+<br> <br>
+<center>
+  <h1><%= @donation.name %></h1>
+  <p>Blood Group :<%= @donation.blood_group %></p>
+  <p>Date Of Birth :<%= @donation.dob %></p>
+  <p>Contact :<%= @donation.contact %></p>
+  <p>Email :<%= @donation.email %></p>
+  <p>City :<%= @donation.city %></p>
+  <p>Last Donation :<%= @donation.last_donate %></p>
+  <br>
+  <%= link_to "Back", donations_path, class:"btn btn-outline-danger " %>
+  <% if current_donar.email == @donation.email %>
+    <%= link_to "edit", edit_donation_path, class:"btn btn-outline-danger" %> <br><br>
+    <%= button_to "delete", donation_path, method: :delete, class:"btn btn-outline-danger" ,data: {confirm: "Are you sure?"} %> <br>
+  <% end %>
+</center>
+<h2> Reviews</h2>
+<hr>
+<% @donation.reviews.each do |review| %>
+  <p>
+    <strong>Name:</strong>
+    <%= review.name %>
+  </p>
+
+  <p>
+    <strong>Review:</strong>
+    <%= review.description %>
+  </p>
+  <%# <%= link_to "edit", edit_donation_review_path(@donation, review) %>
+  <% if current_donar.email == @donation.email %>
+    <%= button_to "delete", donation_review_path(@donation,review), method: :delete, class:"btn btn-outline-danger" ,data: {confirm: "Are you sure?"} %> <br>
+  <% end %>
+    <hr>
+<% end %>
+
+
+<h2>Add a comment:</h2>
+<%= form_with model: [ @donation, @donation.reviews.build ] do |form| %>
+  <p>
+    <%= form.label :name %><br>
+    <%= form.text_field :name %>
+  </p>
+  <p>
+    <%= form.label :email %>
+    <%= form.text_field :email, value: current_donar.email %>
+  </p>
+  <p>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %>
+  </p>
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>

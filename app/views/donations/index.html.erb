@@ -1,0 +1,41 @@
+<% if flash[:notice] %>
+  <div class="alert alert-primary" role="alert">
+    <%= flash[:notice] %>
+  </div>
+<% end %> 
+
+<div class="first_one">
+  <h2>Blood Donation</h2>
+  <h4>Donate blood, save a life!</h4>
+</div>
+<center>
+<% if @query %>
+  <h1>DONOR</h1>
+  <table>
+    <% @donations.each do |donation| %>
+      <tr>
+        <td>
+          <%= link_to donation.name, donation%>
+        </td>
+        <td>
+          <%= donation.blood_group %>
+        </td>
+        <td>
+          <%= donation.city %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  <div class="container-fluid">
+   <%= will_paginate(@donation) %>
+  </div>
+<% end %>
+</center>
+<div class="sec-div-index">
+  <div class="sec-div-index-left">
+    <p>"The Act Of Giving Blood To Someone Who Needs It. It Is Not Just About Giving Blood, But It Is An Act Of Kindness That Saves The Lives Of Hundreds Of People. These Fifteen Minutes Of Your Life Can Save Someone’s Entire Life. You Can’t Even Imagine That Donating One Bag Of Blood Can Be So Beneficial To The Human Race. Donating The Blood Without Expecting Or Asking For Any Money Or Gesture Is A Great Act Of Kindness, And If You Are 18 Years Old Or Above, You Should Definitely Take Part In This Act Of Kindness."</p>
+  </div>
+  <div class="sec-div-index-right">
+
+  </div>
+</div>
