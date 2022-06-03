@@ -37,7 +37,8 @@ class DonationsController < ApplicationController
     if @donation.save
       DonarMailer.with(donation: @donation).welcome_email.deliver_later
       flash[:notice] = "successfully created"
-      redirect_to root_path
+      # redirect_to root_path
+      redirect_to donation_path(@donation)
     else
       render :new, status: :unprocessable_entity
     end

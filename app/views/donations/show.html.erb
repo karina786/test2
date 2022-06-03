@@ -1,3 +1,9 @@
+<% if flash[:notice] %>
+  <div class="alert alert-primary" role="alert">
+    <%= flash[:notice] %>
+  </div>
+<% end %> 
+
 <br> <br>
 <center>
   <h1><%= @donation.name %></h1>
@@ -8,7 +14,7 @@
   <p>City :<%= @donation.city %></p>
   <p>Last Donation :<%= @donation.last_donate %></p>
   <br>
-  <%= link_to "Back", donations_path, class:"btn btn-outline-danger " %>
+  <%# <%= link_to "Back", donations_path, class:"btn btn-outline-danger " %>
   <% if current_donar.email == @donation.email %>
     <%= link_to "edit", edit_donation_path, class:"btn btn-outline-danger" %> <br><br>
     <%= button_to "delete", donation_path, method: :delete, class:"btn btn-outline-danger" ,data: {confirm: "Are you sure?"} %> <br>
@@ -33,22 +39,26 @@
     <hr>
 <% end %>
 
+<% if current_donar.email == @donation.email %>
+  
+<% else %>
+  <h2>Add a comment:</h2>
+  <%= form_with model: [ @donation, @donation.reviews.build ] do |form| %>
+    <p>
+      <%= form.label :name %><br>
+      <%= form.text_field :name %>
+    </p>
+    <p>
+      <%= form.label :email %>
+      <%= form.text_field :email, value: current_donar.email %>
+    </p>
+    <p>
+      <%= form.label :description %><br>
+      <%= form.text_area :description %>
+    </p>
+    <p>
+      <%= form.submit %>
+    </p>
+  <% end %>
 
-<h2>Add a comment:</h2>
-<%= form_with model: [ @donation, @donation.reviews.build ] do |form| %>
-  <p>
-    <%= form.label :name %><br>
-    <%= form.text_field :name %>
-  </p>
-  <p>
-    <%= form.label :email %>
-    <%= form.text_field :email, value: current_donar.email %>
-  </p>
-  <p>
-    <%= form.label :description %><br>
-    <%= form.text_area :description %>
-  </p>
-  <p>
-    <%= form.submit %>
-  </p>
 <% end %>
